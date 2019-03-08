@@ -271,12 +271,8 @@ public class FirebaseAuthPlugin implements MethodCallHandler {
       markUserRequired(result);
       return;
     }
-
-    Map<String, String> arguments = call.arguments();
-    String email = arguments.get("email");
-    String password = arguments.get("password");
-
-    AuthCredential credential = EmailAuthProvider.getCredential(email, password);
+    
+    AuthCredential credential = getCredential((Map<String, Object>) call.arguments());
 
     currentUser
         .linkWithCredential(credential)
